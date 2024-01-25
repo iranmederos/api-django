@@ -4,8 +4,13 @@ from rest_framework import status
 from .serializers import EmpleadoSerializer
 from .models import Empleado
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class GetEmpleadoView(APIView):
+    authentication_classes =[JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         queryset = Empleado.objects.all()
         serializer = EmpleadoSerializer(queryset, many=True)
