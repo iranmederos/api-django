@@ -6,11 +6,12 @@ from .models import Empleado
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-#from autenticacion.views import IsAdmin
+from autenticacion.permisos import IsAdmin
+
 
 class GetEmpleadoView(APIView):
     authentication_classes =[JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdmin]
 
     def get(self, request):
         queryset = Empleado.objects.all()
