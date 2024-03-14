@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Empleado, Tarea
+from .models import Empleado, Tarea, Area, Maquina
 
 
 class TareaSerializer(serializers.ModelSerializer):
@@ -23,3 +23,13 @@ class EmpleadoSerializer(serializers.ModelSerializer):
         representation['tareas'] = tareas_serializer.data
         return representation
 
+class AreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Area
+        fields = '__all__'
+
+
+class MaquinaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Maquina
+        fields = '__all__'

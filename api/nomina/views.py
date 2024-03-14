@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import EmpleadoSerializer,TareaSerializer
-from .models import Empleado, Tarea
+from .serializers import EmpleadoSerializer,TareaSerializer, AreaSerializer, MaquinaSerializer
+from .models import Empleado, Tarea, Area, Maquina
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -53,3 +53,11 @@ class CreateTareaView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+    
+class RetrieveAreas(APIView):
+    def get(self, request):
+        lista_areas= Area.objects.all()
+        serializer= AreaSerializer(data=lista_areas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        
